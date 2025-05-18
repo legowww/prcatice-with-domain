@@ -1,0 +1,64 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+allprojects {
+	group = 'com.ecm'
+	version = '0.0.1-SNAPSHOT'
+
+	repositories {
+		mavenCentral()
+	}
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'java-library'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'org.springframework.boot'
+
+	tasks.named('test') {
+		useJUnitPlatform()
+	}
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
+
+	dependencies {
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
+
+		implementation 'ch.qos.logback:logback-core'
+		implementation 'ch.qos.logback:logback-classic'
+	}
+
+	tasks.register("prepareKotlinBuildScriptModel") {}
+}
+
+jar {
+	enabled = true
+}
+
+bootJar {
+	enabled = false
+}
