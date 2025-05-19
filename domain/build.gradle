@@ -1,4 +1,20 @@
 dependencies {
+    // guava
+    implementation 'com.google.guava:guava:32.1.2-jre'
+
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params'
+
+    // AssertJ
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+
+    // Mockito 코어 (필수)
+    testImplementation 'org.mockito:mockito-core'
+
+    // Mockito와 JUnit 5 통합 (권장)
+    testImplementation 'org.mockito:mockito-junit-jupiter'
 }
 
 jar {
