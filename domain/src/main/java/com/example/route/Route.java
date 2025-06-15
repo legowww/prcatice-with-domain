@@ -10,13 +10,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 @SuperBuilder
 @Getter
-public class Route extends PersistableDomain<String> {
+public class Route extends PersistableDomain<Long> {
 
     private String name;
     private RouteType type;
 
 
-    public static Route create(String name, RouteType type) {
+    public static Route of(String name, RouteType type) {
         checkNotNull(name, "Route name cannot be null");
         checkNotNull(type, "Route type cannot be null");
 

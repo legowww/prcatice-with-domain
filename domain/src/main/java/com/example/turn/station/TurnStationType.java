@@ -3,7 +3,7 @@ package com.example.turn.station;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum TurnStationPointType {
+public enum TurnStationType {
 
     BEGIN("출발 정류장"),
     MIDDLE("중간 정류장"),

@@ -11,17 +11,17 @@ import java.time.temporal.ChronoUnit;
 
 @Getter
 @SuperBuilder
-public class TurnStation extends PersistableDomain<String> {
+public class TurnStation extends PersistableDomain<Long> {
 
     private TurnRoute turnRoute;
     private Station station;
     private TurnStationOnOffType onOffType;
-    private TurnStationPointType pointType;
+    private TurnStationType pointType;
     private int order;
     private OffsetDateTime expectedArrivalTime;
 
-    public static TurnStation create(TurnRoute turnRoute, Station station, TurnStationOnOffType onOffType,
-                               TurnStationPointType pointType, int order, OffsetDateTime expectedArrivalTime) {
+    public static TurnStation of(TurnRoute turnRoute, Station station, TurnStationOnOffType onOffType,
+                                     TurnStationType pointType, int order, OffsetDateTime expectedArrivalTime) {
         OffsetDateTime now = OffsetDateTime.now();
         now.truncatedTo(ChronoUnit.MINUTES);
 

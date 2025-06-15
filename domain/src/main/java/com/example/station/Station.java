@@ -12,12 +12,12 @@ import static com.google.common.base.Preconditions.*;
 
 @Getter
 @SuperBuilder
-public class Station extends PersistableDomain<String> {
+public class Station extends PersistableDomain<Long> {
 
     private String name;
     private Location location;
 
-    public static Station create(String name, Location location) {
+    public static Station of(String name, Location location) {
         checkNotNull(name, "Station name cannot be null");
         checkNotNull(location , "Location cannot be null");
 

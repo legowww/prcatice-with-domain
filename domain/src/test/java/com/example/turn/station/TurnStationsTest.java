@@ -51,7 +51,7 @@ class TurnStationsTest {
         @DisplayName("정류장이 한 개만 있으면 예외가 발생한다")
         void throwExceptionWhenOnlyOneStation() {
             // given
-            TurnStation station = createTurnStation(1, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation station = createTurnStation(1, TurnStationType.BEGIN, TurnStationOnOffType.ON);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Collections.singletonList(station)))
@@ -68,8 +68,8 @@ class TurnStationsTest {
         @DisplayName("정류장 순서가 0 이하인 경우 예외가 발생한다")
         void throwExceptionWhenOrderIsZeroOrNegative() {
             // given
-            TurnStation beginStation = createTurnStation(0, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
-            TurnStation endStation = createTurnStation(-1, TurnStationPointType.END, TurnStationOnOffType.OFF);
+            TurnStation beginStation = createTurnStation(0, TurnStationType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation endStation = createTurnStation(-1, TurnStationType.END, TurnStationOnOffType.OFF);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Arrays.asList(beginStation, endStation)))
@@ -81,9 +81,9 @@ class TurnStationsTest {
         @DisplayName("정류장 순서가 중복되면 예외가 발생한다")
         void throwExceptionWhenOrderIsDuplicated() {
             // given
-            TurnStation beginStation = createTurnStation(1, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
-            TurnStation midStation = createTurnStation(1, TurnStationPointType.MIDDLE, TurnStationOnOffType.ON);
-            TurnStation endStation = createTurnStation(3, TurnStationPointType.END, TurnStationOnOffType.OFF);
+            TurnStation beginStation = createTurnStation(1, TurnStationType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation midStation = createTurnStation(1, TurnStationType.MIDDLE, TurnStationOnOffType.ON);
+            TurnStation endStation = createTurnStation(3, TurnStationType.END, TurnStationOnOffType.OFF);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Arrays.asList(beginStation, midStation, endStation)))
@@ -95,9 +95,9 @@ class TurnStationsTest {
         @DisplayName("정류장 순서가 올바르게 정렬되지 않았다면 예외가 발생한다")
         void throwExceptionWhenOrderIsNotSorted() {
             // given
-            TurnStation beginStation = createTurnStation(3, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
-            TurnStation midStation = createTurnStation(2, TurnStationPointType.MIDDLE, TurnStationOnOffType.ON);
-            TurnStation endStation = createTurnStation(1, TurnStationPointType.END, TurnStationOnOffType.OFF);
+            TurnStation beginStation = createTurnStation(3, TurnStationType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation midStation = createTurnStation(2, TurnStationType.MIDDLE, TurnStationOnOffType.ON);
+            TurnStation endStation = createTurnStation(1, TurnStationType.END, TurnStationOnOffType.OFF);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Arrays.asList(beginStation, midStation, endStation)))
@@ -114,9 +114,9 @@ class TurnStationsTest {
         @DisplayName("시작 정류장이 없으면 예외가 발생한다")
         void throwExceptionWhenNoBeginStation() {
             // given
-            TurnStation station1 = createTurnStation(1, TurnStationPointType.MIDDLE, TurnStationOnOffType.ON);
-            TurnStation station2 = createTurnStation(2, TurnStationPointType.MIDDLE, TurnStationOnOffType.OFF);
-            TurnStation station3 = createTurnStation(3, TurnStationPointType.END, TurnStationOnOffType.OFF);
+            TurnStation station1 = createTurnStation(1, TurnStationType.MIDDLE, TurnStationOnOffType.ON);
+            TurnStation station2 = createTurnStation(2, TurnStationType.MIDDLE, TurnStationOnOffType.OFF);
+            TurnStation station3 = createTurnStation(3, TurnStationType.END, TurnStationOnOffType.OFF);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Arrays.asList(station1, station2, station3)))
@@ -128,9 +128,9 @@ class TurnStationsTest {
         @DisplayName("종료 정류장이 없으면 예외가 발생한다")
         void throwExceptionWhenNoEndStation() {
             // given
-            TurnStation station1 = createTurnStation(1, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
-            TurnStation station2 = createTurnStation(2, TurnStationPointType.MIDDLE, TurnStationOnOffType.OFF);
-            TurnStation station3 = createTurnStation(3, TurnStationPointType.MIDDLE, TurnStationOnOffType.OFF);
+            TurnStation station1 = createTurnStation(1, TurnStationType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation station2 = createTurnStation(2, TurnStationType.MIDDLE, TurnStationOnOffType.OFF);
+            TurnStation station3 = createTurnStation(3, TurnStationType.MIDDLE, TurnStationOnOffType.OFF);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Arrays.asList(station1, station2, station3)))
@@ -142,9 +142,9 @@ class TurnStationsTest {
         @DisplayName("시작 정류장이 여러 개면 예외가 발생한다")
         void throwExceptionWhenMultipleBeginStations() {
             // given
-            TurnStation station1 = createTurnStation(1, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
-            TurnStation station2 = createTurnStation(2, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
-            TurnStation station3 = createTurnStation(3, TurnStationPointType.END, TurnStationOnOffType.OFF);
+            TurnStation station1 = createTurnStation(1, TurnStationType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation station2 = createTurnStation(2, TurnStationType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation station3 = createTurnStation(3, TurnStationType.END, TurnStationOnOffType.OFF);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Arrays.asList(station1, station2, station3)))
@@ -156,9 +156,9 @@ class TurnStationsTest {
         @DisplayName("종료 정류장이 여러 개면 예외가 발생한다")
         void throwExceptionWhenMultipleEndStations() {
             // given
-            TurnStation station1 = createTurnStation(1, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
-            TurnStation station2 = createTurnStation(2, TurnStationPointType.END, TurnStationOnOffType.OFF);
-            TurnStation station3 = createTurnStation(3, TurnStationPointType.END, TurnStationOnOffType.OFF);
+            TurnStation station1 = createTurnStation(1, TurnStationType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation station2 = createTurnStation(2, TurnStationType.END, TurnStationOnOffType.OFF);
+            TurnStation station3 = createTurnStation(3, TurnStationType.END, TurnStationOnOffType.OFF);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Arrays.asList(station1, station2, station3)))
@@ -170,9 +170,9 @@ class TurnStationsTest {
         @DisplayName("첫 번째 정류장이 시작 정류장이 아니면 예외가 발생한다")
         void throwExceptionWhenFirstStationIsNotBegin() {
             // given
-            TurnStation station1 = createTurnStation(1, TurnStationPointType.MIDDLE, TurnStationOnOffType.ON);
-            TurnStation station2 = createTurnStation(2, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
-            TurnStation station3 = createTurnStation(3, TurnStationPointType.END, TurnStationOnOffType.OFF);
+            TurnStation station1 = createTurnStation(1, TurnStationType.MIDDLE, TurnStationOnOffType.ON);
+            TurnStation station2 = createTurnStation(2, TurnStationType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation station3 = createTurnStation(3, TurnStationType.END, TurnStationOnOffType.OFF);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Arrays.asList(station1, station2, station3)))
@@ -184,9 +184,9 @@ class TurnStationsTest {
         @DisplayName("마지막 정류장이 종료 정류장이 아니면 예외가 발생한다")
         void throwExceptionWhenLastStationIsNotEnd() {
             // given
-            TurnStation station1 = createTurnStation(1, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
-            TurnStation station2 = createTurnStation(2, TurnStationPointType.END, TurnStationOnOffType.OFF);
-            TurnStation station3 = createTurnStation(3, TurnStationPointType.MIDDLE, TurnStationOnOffType.OFF);
+            TurnStation station1 = createTurnStation(1, TurnStationType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation station2 = createTurnStation(2, TurnStationType.END, TurnStationOnOffType.OFF);
+            TurnStation station3 = createTurnStation(3, TurnStationType.MIDDLE, TurnStationOnOffType.OFF);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Arrays.asList(station1, station2, station3)))
@@ -203,8 +203,8 @@ class TurnStationsTest {
         @DisplayName("첫 번째 정류장이 승차 정류장이 아니면 예외가 발생한다")
         void throwExceptionWhenFirstStationIsNotOnType() {
             // given
-            TurnStation beginStation = createTurnStation(1, TurnStationPointType.BEGIN, TurnStationOnOffType.OFF);
-            TurnStation endStation = createTurnStation(2, TurnStationPointType.END, TurnStationOnOffType.OFF);
+            TurnStation beginStation = createTurnStation(1, TurnStationType.BEGIN, TurnStationOnOffType.OFF);
+            TurnStation endStation = createTurnStation(2, TurnStationType.END, TurnStationOnOffType.OFF);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Arrays.asList(beginStation, endStation)))
@@ -216,8 +216,8 @@ class TurnStationsTest {
         @DisplayName("마지막 정류장이 하차 정류장이 아니면 예외가 발생한다")
         void throwExceptionWhenLastStationIsNotOffType() {
             // given
-            TurnStation beginStation = createTurnStation(1, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
-            TurnStation endStation = createTurnStation(2, TurnStationPointType.END, TurnStationOnOffType.ON);
+            TurnStation beginStation = createTurnStation(1, TurnStationType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation endStation = createTurnStation(2, TurnStationType.END, TurnStationOnOffType.ON);
 
             // when & then
             assertThatThrownBy(() -> TurnStations.of(Arrays.asList(beginStation, endStation)))
@@ -241,7 +241,7 @@ class TurnStationsTest {
             TurnStation beginStation = turnStations.getBeginStation();
 
             // then
-            assertThat(TurnStationPointType.BEGIN).isEqualTo(beginStation.getPointType());
+            assertThat(TurnStationType.BEGIN).isEqualTo(beginStation.getPointType());
             assertThat(TurnStationOnOffType.ON).isEqualTo(beginStation.getOnOffType());
         }
 
@@ -256,7 +256,7 @@ class TurnStationsTest {
             TurnStation endStation = turnStations.getEndStation();
 
             // then
-            assertThat(TurnStationPointType.END).isEqualTo(endStation.getPointType());
+            assertThat(TurnStationType.END).isEqualTo(endStation.getPointType());
             assertThat(TurnStationOnOffType.OFF).isEqualTo(endStation.getOnOffType());
         }
 
@@ -303,7 +303,7 @@ class TurnStationsTest {
             TurnStations turnStations = TurnStations.of(originalStations);
 
             // when - 원본 리스트 수정 시도
-            TurnStation newStation = createTurnStation(4, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
+            TurnStation newStation = createTurnStation(4, TurnStationType.BEGIN, TurnStationOnOffType.ON);
             originalStations.add(newStation);
 
             // then
@@ -320,7 +320,7 @@ class TurnStationsTest {
             // when & then
             assertThatThrownBy(() -> {
                 List<TurnStation> stations = turnStations.turnStations();
-                stations.add(createTurnStation(4, TurnStationPointType.BEGIN, TurnStationOnOffType.ON));
+                stations.add(createTurnStation(4, TurnStationType.BEGIN, TurnStationOnOffType.ON));
             }).isInstanceOf(UnsupportedOperationException.class);
         }
 
@@ -339,14 +339,14 @@ class TurnStationsTest {
     }
 
     private List<TurnStation> createTurnStations() {
-        TurnStation beginStation = createTurnStation(1, TurnStationPointType.BEGIN, TurnStationOnOffType.ON);
-        TurnStation midStation = createTurnStation(2, TurnStationPointType.MIDDLE, TurnStationOnOffType.ON);
-        TurnStation endStation = createTurnStation(3, TurnStationPointType.END, TurnStationOnOffType.OFF);
+        TurnStation beginStation = createTurnStation(1, TurnStationType.BEGIN, TurnStationOnOffType.ON);
+        TurnStation midStation = createTurnStation(2, TurnStationType.MIDDLE, TurnStationOnOffType.ON);
+        TurnStation endStation = createTurnStation(3, TurnStationType.END, TurnStationOnOffType.OFF);
 
         return Arrays.asList(beginStation, midStation, endStation);
     }
 
-    private TurnStation createTurnStation(int order, TurnStationPointType pointType, TurnStationOnOffType onOffType) {
+    private TurnStation createTurnStation(int order, TurnStationType pointType, TurnStationOnOffType onOffType) {
         TurnStation turnStation = mock(TurnStation.class);
 
         when(turnStation.getOrder()).thenReturn(order);

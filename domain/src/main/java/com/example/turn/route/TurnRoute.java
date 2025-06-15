@@ -12,13 +12,12 @@ import java.util.List;
 
 @Getter
 @SuperBuilder
-public class TurnRoute extends PersistableDomain<String> {
+public class TurnRoute extends PersistableDomain<Long> {
 
-    private String name;
     private Route route;
     private TurnStations turnStations;
 
-    public static TurnRoute create(Route route, List<TurnStation> turnStations) {
+    public static TurnRoute of(Route route, List<TurnStation> turnStations) {
         return TurnRoute.builder()
                 .route(route)
                 .turnStations(TurnStations.of(turnStations))

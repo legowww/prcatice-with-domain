@@ -69,11 +69,11 @@ public record TurnStations(List<TurnStation> turnStations) {
 
     private void validateBeginAndEndStationExistOnlyOne(List<TurnStation> turnStations) {
         long beginCount = turnStations.stream()
-                .filter(turnStation -> turnStation.getPointType() == TurnStationPointType.BEGIN)
+                .filter(turnStation -> turnStation.getPointType() == TurnStationType.BEGIN)
                 .count();
 
         long endCount = turnStations.stream()
-                .filter(turnStation -> turnStation.getPointType() == TurnStationPointType.END)
+                .filter(turnStation -> turnStation.getPointType() == TurnStationType.END)
                 .count();
 
         if (beginCount != 1) {
@@ -87,11 +87,11 @@ public record TurnStations(List<TurnStation> turnStations) {
         TurnStation beginStation = turnStations.getFirst();
         TurnStation endStation = turnStations.getLast();
 
-        if (beginStation.getPointType() != TurnStationPointType.BEGIN) {
+        if (beginStation.getPointType() != TurnStationType.BEGIN) {
             throw new IllegalArgumentException("정류장 목록의 첫 번째 정류장은 시작 정류장이어야 합니다.");
         }
 
-        if (endStation.getPointType() != TurnStationPointType.END) {
+        if (endStation.getPointType() != TurnStationType.END) {
             throw new IllegalArgumentException("정류장 목록의 마지막 정류장은 종료 정류장이어야 합니다.");
         }
     }

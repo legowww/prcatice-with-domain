@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: memory
+  config:
+    import:
+      - db.yml
+
+---
+spring:
+  config:
+    activate:
+      on-profile: memory
+
+---
+spring:
+  config:
+    activate:
+      on-profile: db
+
